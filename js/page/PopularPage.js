@@ -1,15 +1,16 @@
 import React, {useEffect} from 'react'
 import {View, Text, StyleSheet, RefreshControl, FlatList, ActivityIndicator} from 'react-native'
-import {createAppContainer} from 'react-navigation'
+import {createAppContainer, ThemeColors} from 'react-navigation'
 import {createMaterialTopTabNavigator} from 'react-navigation-tabs'
 import {connect} from 'react-redux'
-// import NavigationUtil from '../navigator/NavigationUtil'
+import NavigationUtil from '../navigator/NavigationUtil'
+import NavigationBar from '../common/NavigationBar'
 import actions from '../action'
 import PopularItem from '../common/PopularItem'
 
 const URL = 'https://api.github.com/search/repositories?q=';
 const QUERY_STR = '&sort=stars';
-const THEME_COLOR = 'red'
+const THEME_COLOR = '#678'
 
 // const PopularTab = props => {
 //     return (
@@ -62,7 +63,7 @@ const PopularTab = props => {
     }
 
     const renderItem = data => {
-        return <PopularItem item={data.item} onSelect={() => {}} />
+        return <PopularItem item={data.item} onSelect={() => NavigationUtil.goPage({projectModel: data.item}, 'DetailPage')} />
     }
 
     const genIndicator = () => {
@@ -143,7 +144,13 @@ const PopularPage = () => {
 
     return (
         <View style={{flex:1}}>
+            <NavigationBar
+                title="最热"
+                statusBar={{backgroundColor: THEME_COLOR}}
+                style={{backgroundColor: THEME_COLOR}}
+            />
             <TabNavigator />
+
         </View>
     )
 }

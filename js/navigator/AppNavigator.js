@@ -28,7 +28,12 @@ const MainNavigator = createStackNavigator({
             headerShown: false
         }
     },
-    DetailPage: DetailPage,
+    DetailPage: {
+        screen: DetailPage,
+        navigationOptions: {
+            headerShown: false
+        }
+    },
     DataStoreDemoPage
 })
 
